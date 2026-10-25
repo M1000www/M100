@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171025">
+<title>DaniShop | Tienda online</title>
+<meta name="description" content="Descubre los accesorios de DaniShop y consulta cada producto en Temu.">
+
+<style>
+:root {
+  --bg: #100d18;
+  --panel: #21182f;
+  --text: #f8f5ff;
+  --muted: #bcb2cc;
+  --pink: #f472b6;
+  --orange: #fb923c;
+  --purple: #a78bfa;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(ellipse at top, #302044, var(--bg) 60%);
+  color: var(--text);
+}
+header {
+  padding: 20px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff20;
+  background: #100d18dd;
+}
+.logo {
+  color: white;
+  font-size: 28px;
+  font-weight: 900;
+  text-decoration: none;
+}
+.logo span {
+  color: var(--pink);
+}
+.nav-button {
+  background: var(--panel);
+  color: white;
+  padding: 11px 16px;
+  border-radius: 25px;
+  text-decoration: none;
+  border: 1px solid #ffffff20;
+}
+.hero {
+  text-align: center;
+  padding: 70px 20px 45px;
+}
+.badge {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 25px;
+  background: #f472b620;
+  border: 1px solid #f472b650;
+  color: #fbcfe8;
+}
+h1 {
+  font-size: clamp(38px, 7vw, 68px);
+  letter-spacing: -2px;
+  margin: 22px 0 15px;
+}
+h1 span {
+  background: linear-gradient(90deg, var(--pink), var(--orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero p {
+  max-width: 600px;
+  margin: auto;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.container {
+  width: min(1100px, 92%);
+  margin: auto;
+}
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0 25px;
+}
+.section-title h2 {
+  font-size: 27px;
+}
+#count {
+  color: var(--muted);
+  font-size: 14px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+  padding-bottom: 40px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid #ffffff18;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--purple);
+}
+.visual {
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle, #49315f, #21182f 75%);
+}
+.visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+  background: #fff;
+}
+.emoji {
+  font-size: 78px;
+}
+.tag {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #100d18cc;
+  font-size: 12px;
+}
+.details {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.details h3 {
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0 0 10px;
+}
+.description {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  flex: 1;
+}
+.price {
+  font-size: 23px;
+  font-weight: bold;
+  margin: 12px 0;
+}
+.price small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: normal;
+}
+.buy {
+  display: block;
+  text-align: center;
+  padding: 13px 10px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--pink), var(--orange));
+  color: #241322;
+  font-weight: bold;
+  text-decoration: none;
+  transition: filter .2s;
+}
+.buy:hover {
+  filter: brightness(1.12);
+}
+.notice {
+  padding: 17px;
+  margin: 10px 0 35px;
+  border: 1px solid #ffffff20;
+  border-radius: 15px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+footer {
+  text-align: center;
+  padding: 28px 15px;
+  border-top: 1px solid #ffffff20;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+footer strong {
+  color: white;
+}
+@media (max-width: 520px) {
+  .hero {
+    padding-top: 48px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .visual {
+    height: 150px;
+  }
+  .visual img {
+    padding: 7px;
+  }
+  .emoji {
+    font-size: 55px;
+  }
+  .details {
+    padding: 12px;
+  }
+  .details h3 {
+    font-size: 15px;
+  }
+  .description {
+    font-size: 12px;
+  }
+  .price {
+    font-size: 18px;
+  }
+  .buy {
+    font-size: 13px;
+    padding: 11px 5px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="#">Dani<span>Shop</span></a>
+  <a class="nav-button" href="#productos">Ver productos ↓</a>
+</header>
+
+<section class="hero">
+  <span class="badge">✨ Catálogo DaniShop</span>
+  <h1>Tu estilo, <span>tus accesorios.</span></h1>
+  <p>
+    Descubre nuestra selección de accesorios y encuentra tu próximo favorito.
+    Pulsa en «Comprar ahora» para consultar el producto en Temu.
+  </p>
+</section>
+
+<main class="container" id="productos">
+
+  <div class="section-title">
+    <h2>🛍️ Nuestros productos</h2>
+    <span id="count">4 productos</span>
+  </div>
+
+  <section class="grid">
+
+    <!-- PRODUCTO 1 -->
+    <article class="card">
+      <div class="visual">
+        <span class="tag">Accesorios</span>
+        <img src="https://img.kwcdn.com/product/fancy/bea62b6f-9adf-4b60-8535-912255291a91.jpg" alt="Cadena tipo paperclip con estrella" loading="lazy">
+      </div>
+      <div class="details">
+        <h3>Cadena tipo paperclip con estrella</h3>
+        <p class="description">
+          Cadena de estilo minimalista con estrella, inspiración punk e hip-hop.
+          Un accesorio versátil para completar tu look diario.
+        </p>
+        <p class="price">
+          3,24 €
+          <small>Precio mostrado en Temu; puede cambiar.</small>
+        </p>
+        <a class="buy"
+           href="https://share.temu.com/pjF8nzWAbwB"
+           target="_blank" rel="noopener noreferrer">
+          Comprar ahora ↗
+        </a>
+      </div>
+    </article>
+
+    <!-- PRODUCTO 2 -->
+    <article class="card">
+      <div class="visual">
+        <span class="tag">Moda Y2K</span>
+        <img src="https://img.kwcdn.com/product/fancy/b29ca74c-1f9e-44c4-bdd5-188e7afc814a.jpg" alt="Cinturón Y2K hueco estilo punk" loading="lazy">
+      </div>
+      <div class="details">
+        <h3>Cinturón Y2K hueco estilo punk</h3>
+        <p class="description">
+          Cinturón de estilo punk moderno para hombre, ideal para combinar
+          con ropa casual y looks de inspiración Y2K.
+        </p>
+        <p class="price">
+          6,03 €
+          <small>Precio mostrado en Temu; puede cambiar.</small>
+        </p>
+        <a class="buy"
+           href="https://share.temu.com/jyVgrWB6FeB"
+           target="_blank" rel="noopener noreferrer">
+          Comprar ahora ↗
+        </a>
+      </div>
+    </article>
+
+    <!-- PRODUCTO 3 -->
+    <article class="card">
+      <div class="visual">
+        <span class="tag">Halloween</span>
+        <img src="https://img.kwcdn.com/product/open/43860c0352a240cfa1be5223ceb7d4b3-goods.jpeg" alt="Máscara de cosplay de Scream" loading="lazy">
+      </div>
+      <div class="details">
+        <h3>Máscara de cosplay de Scream</h3>
+        <p class="description">
+          Máscara para fiestas de Halloween, disfraces, eventos, reuniones,
+          actuaciones y juegos de disfraces.
+        </p>
+        <p class="price">
+          4,15 €
+          <small>Precio mostrado en Temu; puede cambiar.</small>
+        </p>
+        <a class="buy"
+           href="https://share.temu.com/UMGYgdTDAFB"
+           target="_blank" rel="noopener noreferrer">
+          Comprar ahora ↗
+        </a>
+      </div>
+    </article>
+
+    <!-- PRODUCTO 4 -->
+    <article class="card">
+      <div class="visual">
+        <span class="tag">Hip-hop</span>
+        <img src="https://img.kwcdn.com/product/open/957c479fc12d460195ebb666221e8568-goods.jpeg" alt="Grillz azul hielo y blanco" loading="lazy">
+      </div>
+      <div class="details">
+        <h3>Grillz azul hielo y blanco — SEUSUK</h3>
+        <p class="description">
+          Juego de 2 piezas con circonitas cúbicas CZ en azul hielo y blanco.
+          Accesorio de moda unisex para fiestas y escenarios.
+        </p>
+        <p class="price">
+          6,69 €
+          <small>Precio mostrado en Temu; puede cambiar.</small>
+        </p>
+        <a class="buy"
+           href="https://share.temu.com/gtkWqNpZfbB"
+           target="_blank" rel="noopener noreferrer">
+          Comprar ahora ↗
+        </a>
+      </div>
+    </article>
+
+  </section>
+
+  <div class="notice">
+    <strong>Información importante:</strong>
+    DaniShop muestra productos enlazados a Temu y no procesa pagos.
+    Los precios y la disponibilidad pueden cambiar. Comprueba las condiciones,
+    el precio final y la entrega directamente en Temu antes de comprar.
+  </div>
+
+</main>
+
+<footer>
+  <strong>DaniShop</strong><br>
+  Catálogo de accesorios con enlaces a Temu.<br>
+  La compra y el pago se realizan en la página de Temu.
+</footer>
+
+</body>
+</html>
