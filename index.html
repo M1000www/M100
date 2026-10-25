@@ -486,5 +486,123 @@ footer strong {
   La compra y el pago se realizan en la página de Temu.
 </footer>
 
+
+<!-- DaniShop OWNER: seguimiento básico con Firebase -->
+<style>
+#owner-tools{margin:20px auto 0;text-align:center}
+#owner-login,#owner-logout{border:0;border-radius:10px;padding:10px 14px;background:#a78bfa;color:#160e20;font-weight:bold;cursor:pointer}
+#owner-panel{display:none;text-align:left;margin:16px auto;padding:18px;max-width:900px;background:#21182f;border:1px solid #a78bfa;border-radius:14px}
+#owner-panel h3{margin-top:0}
+#owner-stats{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+.owner-stat{padding:12px;background:#100d18;border-radius:10px;min-width:130px}
+#owner-events{font-size:13px;overflow-wrap:anywhere}
+</style>
+<div id="owner-tools" class="container">
+  <button id="owner-login" type="button">OWNER · Iniciar sesión</button>
+  <section id="owner-panel">
+    <h3>🔐 DaniShop OWNER</h3>
+    <p id="owner-status">Comprobando acceso…</p>
+    <div id="owner-stats"></div>
+    <h4>Últimos eventos</h4>
+    <div id="owner-events">Cargando…</div>
+    <button id="owner-logout" type="button">Cerrar sesión</button>
+  </section>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+(() => {
+  const firebaseConfig = {
+    apiKey: "AIzaSyDrJKGlwdi_el2QfqK4tCDeLY3_xeOhPbs",
+    authDomain: "danishop-owner.firebaseapp.com",
+    projectId: "danishop-owner",
+    storageBucket: "danishop-owner.firebasestorage.app",
+    messagingSenderId: "642353848783",
+    appId: "1:642353848783:web:770cecfaec30c77db432ba",
+    measurementId: "G-41YMKKGYXJ"
+  };
+  if (!window.firebase) return;
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const loginBtn = document.getElementById('owner-login');
+  const panel = document.getElementById('owner-panel');
+  const status = document.getElementById('owner-status');
+  const stats = document.getElementById('owner-stats');
+  const eventsList = document.getElementById('owner-events');
+
+  async function recordEvent(type, productId) {
+    try {
+      await db.collection('events').add({
+        type,
+        productId: String(productId || 'store').slice(0, 100),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    } catch (e) {
+      // Si Firebase bloquea el registro, la tienda seguirá funcionando.
+      console.debug('No se pudo registrar el evento:', e.code || e.message);
+    }
+  }
+
+  // Registra una visita a la página.
+  if (!sessionStorage.getItem('danishop_visit_recorded')) {
+    sessionStorage.setItem('danishop_visit_recorded', '1');
+    recordEvent('visit', 'store');
+  }
+
+  // Registra los clics en los enlaces de compra.
+  document.querySelectorAll('a.buy').forEach((link, index) => {
+    link.addEventListener('click', () => recordEvent('click', 'product-' + (index + 1)));
+  });
+
+  loginBtn.addEventListener('click', async () => {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      await auth.signInWithPopup(provider);
+    } catch (e) {
+      alert('No se pudo iniciar sesión: ' + (e.message || e.code));
+    }
+  });
+  document.getElementById('owner-logout').addEventListener('click', () => auth.signOut());
+
+  auth.onAuthStateChanged(async user => {
+    if (!user) {
+      panel.style.display = 'none';
+      loginBtn.style.display = 'inline-block';
+      return;
+    }
+    panel.style.display = 'block';
+    loginBtn.style.display = 'none';
+    status.textContent = 'Sesión iniciada como ' + (user.email || 'cuenta Google') + '. Comprobando permisos…';
+    stats.textContent = '';
+    eventsList.textContent = 'Cargando eventos…';
+    try {
+      const snapshot = await db.collection('events').orderBy('createdAt', 'desc').limit(500).get();
+      const events = snapshot.docs.map(doc => doc.data());
+      const visits = events.filter(e => e.type === 'visit').length;
+      const clicks = events.filter(e => e.type === 'click').length;
+      status.textContent = 'Acceso autorizado por las reglas de Firestore.';
+      stats.innerHTML = '<div class="owner-stat"><strong>Visitas</strong><br>' + visits + '</div><div class="owner-stat"><strong>Clics en productos</strong><br>' + clicks + '</div><div class="owner-stat"><strong>Eventos cargados</strong><br>' + events.length + '</div>';
+      eventsList.textContent = '';
+      if (!events.length) {
+        eventsList.textContent = 'Todavía no hay eventos. Visita la tienda y pulsa algún producto para probarlo.';
+      } else {
+        events.slice(0, 30).forEach(e => {
+          const line = document.createElement('p');
+          const date = e.createdAt && e.createdAt.toDate ? e.createdAt.toDate().toLocaleString('es-ES') : 'fecha pendiente';
+          line.textContent = date + ' · ' + (e.type || 'evento') + ' · ' + (e.productId || 'store');
+          eventsList.appendChild(line);
+        });
+      }
+    } catch (e) {
+      status.textContent = 'Sesión iniciada, pero Firestore no autorizó la lectura. Comprueba que en las reglas pusiste el UID correcto de esta cuenta. (' + (e.code || e.message) + ')';
+      stats.textContent = '';
+      eventsList.textContent = 'Sin acceso a las estadísticas.';
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
