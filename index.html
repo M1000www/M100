@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#171025">
-<title>DaniShop | Tienda online</title>
-<meta name="description" content="Descubre los accesorios de DaniShop y consulta cada producto en Temu.">
+<meta name="theme-color" content="#031006">
+<title>Ismael Shop | Cyber Market</title>
+<meta name="description" content="Descubre los accesorios de Ismael Shop y consulta cada producto en Temu.">
 
 <style>
 :root {
@@ -246,6 +246,27 @@ footer strong {
   }
 }
 </style>
+
+<style id="ismael-hacker-theme">
+:root{--green:#39ff14;--green2:#00e676;--ink:#e5ffe9;--bg:#030805;--card:#08130b;--line:#174d27;--muted:#91b69a}
+html{background:#020603}
+body{background:radial-gradient(ellipse at top,#0b2812 0%,#030805 55%,#010302 100%)!important;color:var(--ink)!important}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.10;background-image:linear-gradient(rgba(57,255,20,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(57,255,20,.12) 1px,transparent 1px);background-size:32px 32px}
+body>*{position:relative}
+header,.head,.topbar,.navbar,nav{background:rgba(2,10,4,.97)!important;color:var(--green)!important;border-color:var(--line)!important}
+h1,h2,h3,.brand,.logo{color:#c8ffd0!important}
+a,nav a,.category{color:var(--green)!important}
+.card,.product-card,.panel,.cart,.filters,.category-card{background:#07120a!important;color:var(--ink)!important;border:1px solid #174d27!important;box-shadow:0 0 18px rgba(0,255,65,.06)!important}
+input,select,textarea{background:#020704!important;color:#d8ffe0!important;border:1px solid #226b35!important}
+button,.btn,.add,.quick,.primary{background:linear-gradient(135deg,#0a7a2a,#35ff43)!important;color:#001b06!important;border:1px solid #39ff14!important;font-weight:800!important}
+button:hover,.btn:hover,.add:hover,.quick:hover,.primary:hover{box-shadow:0 0 18px rgba(57,255,20,.35)!important;filter:brightness(1.08)}
+.badge,.discount,.offer{background:#39ff14!important;color:#001b06!important}
+small,.muted,.subtitle,.description{color:#9abca0!important}
+hr{border-color:#174d27!important}
+@keyframes cyberPulse{0%,100%{text-shadow:0 0 4px #39ff14}50%{text-shadow:0 0 13px #39ff14}}
+.brand,.logo{animation:cyberPulse 2.8s infinite}
+@media(max-width:700px){body{background:#030805!important}}
+</style>
 </head>
 
 <body>
@@ -256,7 +277,7 @@ footer strong {
 </header>
 
 <section class="hero">
-  <span class="badge">✨ Catálogo DaniShop</span>
+  <span class="badge">✨ Catálogo Ismael Shop</span>
   <h1>Tu estilo, <span>tus accesorios.</span></h1>
   <p>
     Descubre nuestra selección de accesorios y encuentra tu próximo favorito.
@@ -546,7 +567,7 @@ footer strong {
 
   <div class="notice">
     <strong>Información importante:</strong>
-    DaniShop muestra productos enlazados a Temu y no procesa pagos.
+    Ismael Shop muestra productos enlazados a Temu y no procesa pagos.
     Los precios y la disponibilidad pueden cambiar. Comprueba las condiciones,
     el precio final y la entrega directamente en Temu antes de comprar.
   </div>
@@ -554,13 +575,13 @@ footer strong {
 </main>
 
 <footer>
-  <strong>DaniShop</strong><br>
+  <strong>Ismael Shop</strong><br>
   Catálogo de accesorios con enlaces a Temu.<br>
   La compra y el pago se realizan en la página de Temu.
 </footer>
 
 
-<!-- DaniShop OWNER: seguimiento básico con Firebase -->
+<!-- Ismael Shop OWNER: seguimiento básico con Firebase -->
 <style>
 #owner-tools{margin:20px auto 0;text-align:center}
 #owner-login,#owner-logout{border:0;border-radius:10px;padding:10px 14px;background:#a78bfa;color:#160e20;font-weight:bold;cursor:pointer}
@@ -573,7 +594,7 @@ footer strong {
 <div id="owner-tools" class="container">
   <button id="owner-login" type="button">OWNER · Iniciar sesión</button>
   <section id="owner-panel">
-    <h3>🔐 DaniShop OWNER</h3>
+    <h3>🔐 Ismael Shop OWNER</h3>
     <p id="owner-status">Comprobando acceso…</p>
     <div id="owner-stats"></div>
     <h4>Últimos eventos</h4>
@@ -588,9 +609,9 @@ footer strong {
 (() => {
   const firebaseConfig = {
     apiKey: "AIzaSyDrJKGlwdi_el2QfqK4tCDeLY3_xeOhPbs",
-    authDomain: "danishop-owner.firebaseapp.com",
-    projectId: "danishop-owner",
-    storageBucket: "danishop-owner.firebasestorage.app",
+    authDomain: "Ismael Shop-owner.firebaseapp.com",
+    projectId: "Ismael Shop-owner",
+    storageBucket: "Ismael Shop-owner.firebasestorage.app",
     messagingSenderId: "642353848783",
     appId: "1:642353848783:web:770cecfaec30c77db432ba",
     measurementId: "G-41YMKKGYXJ"
@@ -619,8 +640,8 @@ footer strong {
   }
 
   // Registra una visita a la página.
-  if (!sessionStorage.getItem('danishop_visit_recorded')) {
-    sessionStorage.setItem('danishop_visit_recorded', '1');
+  if (!sessionStorage.getItem('Ismael Shop_visit_recorded')) {
+    sessionStorage.setItem('Ismael Shop_visit_recorded', '1');
     recordEvent('visit', 'store');
   }
 
